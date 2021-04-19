@@ -116,7 +116,8 @@ const clearOperations = () =>{
 const printOperations = (operations)=>{
   withOperations.innerHTML = '';
   for (let i = 0; i < operations.length; i++) {
-      const codeBox = `<div id="${operations[i].id}" class="columns">
+      let codeBox = document.createElement('div');
+      codeBox = `<div id="${operations[i].id}" class="columns">
           <div class="column is-3 description-style">${operations[i].description}</div> 
           <div class="column is-3 category-style">${operations[i].category}</div>
           <div class="column is-2 has-text-right">${operations[i].date}</div>
@@ -124,8 +125,9 @@ const printOperations = (operations)=>{
           <div class="column is-2 has-text-right">
             <a class="edit-op">Editar</a>
             <a class="delete-op">Eliminar</a>
-          </div> 
-      </div>`
+          </div>
+          </div>`
+
       withOperations.insertAdjacentHTML('beforeend', codeBox)
   }
 }
@@ -168,14 +170,26 @@ btnAcceptNewOperation.addEventListener('click', ()=>{
 
 // Start with all operations of local Storage
 if(JSON.parse(localStorage.getItem('operations')) === null){
-  withOperations.classList.add = 'display';
-  noOperations.classList.remove = 'display';
+  withOperations.classList.add('display');
+  noOperations.classList.remove('display');
 } else{
-  withOperations.classList.remove = 'display';
-  noOperations.classList.add = 'display';
+  withOperations.classList.remove('display');
+  noOperations.classList.add('display');
   operations = JSON.parse(localStorage.getItem('operations'));
   printOperations(operations);
 }
 
 // operations = JSON.parse(localStorage.getItem('operations')) === null ? operations : JSON.parse(localStorage.getItem('operations'));
 // printOperations(operations);
+
+// Delete operation
+operations = JSON.parse(localStorage.getItem('operations'));
+const btnDelete = document.getElementsByClassName('delete-op');
+
+const deleteOperation = () =>{
+  btnDelete.addEventListener('click', ()=>{
+    console.log('hola');
+  })
+}
+
+deleteOperation()
